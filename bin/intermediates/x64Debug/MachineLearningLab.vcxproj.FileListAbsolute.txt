@@ -1,0 +1,3 @@
+D:\ML Lab\MachineLearningLab\bin\intermediates\x64Debug\MachineLearningLab.vcxproj.AssemblyReference.cache
+D:\ML Lab\MachineLearningLab\bin\intermediates\x64Debug\MachineLearningLab.src.MainForm.resources
+D:\ML Lab\MachineLearningLab\bin\intermediates\x64Debug\MachineLearningLab.vcxproj.GenerateResource.cache
