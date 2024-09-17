@@ -30,27 +30,71 @@ void KNNClassifier::fit(const std::vector<std::vector<double>>& X_train, const s
 	y_train_ = y_train;
 }
 
+// Comparator function
+bool compareDistances(const std::pair<double, double>& a, const std::pair<double, double>& b) {
+    return a.first < b.first;
+}
 
 // predict function: Predicts the labels of a given set of test data points using the K-Nearest Neighbors algorithm.//
 std::vector<double> KNNClassifier::predict(const std::vector<std::vector<double>>& X_test) const {
-	std::vector<double> y_pred; // Store predicted labels for all test data points
-	y_pred.reserve(X_test.size()); // Reserve memory for y_pred to avoid frequent reallocation
+    std::vector<double> y_pred; // Store predicted labels for all test data points
+    y_pred.reserve(X_test.size()); // Reserve memory for y_pred to avoid frequent reallocation
 
-	// Check if training data is empty
-	if (X_train_.empty() || y_train_.empty()) {
-		throw std::runtime_error("Error: Empty training data.");
-	}
+    // Check if training data is empty
+    if (X_train_.empty() || y_train_.empty()) {
+        throw std::runtime_error("Error: Empty training data.");
+    }
+    
+    // Loop through each test data point
+    for (const auto& test_point : X_test) {
+        // Vector to store distances and corresponding labels
+        std::vector<std::pair<double, double>> distances;
 
-	/* Implement the following:
-		--- Loop through each test data point
-		--- Calculate Euclidean distance between test data point and each training data point
-		--- Loop through the labels and their counts to find the most frequent label
-		--- Check if predicted label is valid
-	*/
-	
-	//TODO
-	
-	return y_pred; // Return vector of predicted labels for all test data points
+        // Calculate Euclidean distance between test data point and each training data point
+        for (size_t i = 0; i < X_train_.size(); ++i) {
+            // Choose one of the distance functions
+            double distance = SimilarityFunctions::euclideanDistance(test_point, X_train_[i]);
+            // double distance = SimilarityFunctions::hammingDistance(test_point, X_train_[i]);
+            // double distance = SimilarityFunctions::jaccardDistance(test_point, X_train_[i]);
+            // double distance = SimilarityFunctions::cosineDistance(test_point, X_train_[i]);
+            // double distance = SimilarityFunctions::manhattanDistance(test_point, X_train_[i]);
+            // int p = 3; // For Minkowski Distance
+            // double distance = SimilarityFunctions::minkowskiDistance(test_point, X_train_[i], p);
+
+            distances.push_back(std::make_pair(distance, y_train_[i]));
+        }
+
+        // Sort distances in ascending order
+        std::sort(distances.begin(), distances.end(), compareDistances);
+
+
+        // Loop through the labels of the k nearest neighbors
+        std::unordered_map<double, int> label_count;
+        for (int i = 0; i < k_; ++i) {
+            double label = distances[i].second;
+            label_count[label]++;
+        }
+
+        // Find the most frequent label
+        int max_count = 0;
+        double predicted_label = -1;
+        for (const auto& lc : label_count) {
+            if (lc.second > max_count) {
+                max_count = lc.second;
+                predicted_label = lc.first;
+            }
+        }
+
+        // Check if predicted label is valid
+        if (predicted_label == -1) {
+            throw std::runtime_error("Error: Unable to predict label.");
+        }
+
+        // Add predicted label to y_pred
+        y_pred.push_back(predicted_label);
+    }
+
+    return y_pred; // Return vector of predicted labels for all test data points
 }
 
 
