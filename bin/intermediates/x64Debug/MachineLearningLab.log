@@ -1,4 +1,12 @@
-﻿  KNNRegression.cpp
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Regression\KNNRegression.cpp(123,46): warning C4101: 'e': unreferenced local variable
+﻿  MainForm.cpp
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\MainForm.h(1642,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'src/MainForm.cpp')
+  
+  LinearRegression.cpp
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\MainForm.h(1642,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'src/Regression/LinearRegression.cpp')
+  
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Regression\LinearRegression.cpp(110,46): warning C4101: 'e': unreferenced local variable
+  Generating Code...
   DecisionTreeClassification.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   MachineLearningLab.vcxproj -> D:\ML Lab\MachineLearningLab\bin\x64Debug\MachineLearningLab.exe

@@ -53,11 +53,11 @@ std::vector<double> KNNRegression::predict(const std::vector<std::vector<double>
 	//TODO
 
     for (const auto& test_point : X_test) {
-        std::vector<std::pair<double, size_t>> distances; 
+        std::vector<std::pair<double, int>> distances; 
 
-        for (size_t i = 0; i < this->X_train_.size(); ++i) {
+        for (int i = 0; i < this->X_train_.size(); i++) {
             double distance = 0.0;
-            for (size_t j = 0; j < test_point.size(); ++j) {
+            for (int j = 0; j < test_point.size(); j++) {
                 distance += SimilarityFunctions::euclideanDistance(test_point, this->X_train_[i]);
             }
             distances.emplace_back(std::sqrt(distance), i); 
@@ -66,7 +66,7 @@ std::vector<double> KNNRegression::predict(const std::vector<std::vector<double>
         std::sort(distances.begin(), distances.end());
 
         double y_sum = 0.0;
-        for (size_t i = 0; i < this->k_; ++i) {
+        for (int i = 0; i < this->k_; i++) {
             y_sum += this->y_train_[distances[i].second]; 
         }
 
