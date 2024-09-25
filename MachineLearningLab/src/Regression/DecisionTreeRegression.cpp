@@ -72,6 +72,32 @@ double DecisionTreeRegression::meanSquaredError(std::vector<double>& y, std::vec
 	
 	// Calculate the mse
 	// TODO
+
+	std::vector<double> left, right;
+
+	for (const auto& val : y) {
+		if (val <= split_thresh) {
+			left.push_back(val);
+		}
+		else {
+			right.push_back(val);
+		}
+	}
+
+	double leftMean = this->mean(left);
+	double rightMean = this->mean(right);
+
+	double mseLeft = 0.0, mseRight = 0.0;
+
+	for (const auto& val : left) {
+		mseLeft += pow(val - leftMean, 2);
+	}
+
+	for (const auto& val : right) {
+		mseRight += pow(val - rightMean, 2);
+	}
+
+	mse = (mseLeft + mseRight) / y.size();
 	
 	return mse;
 }
@@ -80,11 +106,13 @@ double DecisionTreeRegression::meanSquaredError(std::vector<double>& y, std::vec
 double DecisionTreeRegression::mean(std::vector<double>& values) {
 
 	double meanValue = 0.0;
+
+
+	for (const auto& value : values) {
+		meanValue += value;
+	}
 	
-	// calculate the mean
-	// TODO
-	
-	return meanValue;
+	return meanValue /= values.size();
 }
 
 // traverseTree function: Traverses the decision tree and returns the predicted value for the given input vector.//
