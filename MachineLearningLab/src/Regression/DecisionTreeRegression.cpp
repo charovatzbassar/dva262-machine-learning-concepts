@@ -39,6 +39,12 @@ std::vector<double> DecisionTreeRegression::predict(std::vector<std::vector<doub
 	
 	// Implement the function
 	// TODO
+
+	for (auto& row : X) {
+		double pred = this->traverseTree(row, this->root);
+		predictions.push_back(pred);
+	}
+
 	return predictions;
 }
 
@@ -46,45 +52,125 @@ std::vector<double> DecisionTreeRegression::predict(std::vector<std::vector<doub
 // growTree function: Grows a decision tree regression model using the given data and parameters //
 Node* DecisionTreeRegression::growTree(std::vector<std::vector<double>>& X, std::vector<double>& y, int depth) {
 
+	// Define stopping criteria
+	if (depth >= this->max_depth || X.size() <= this->min_samples_split) {
+		return new Node(-1, -1.0, nullptr, nullptr, this->mean(y)); // Create a leaf node with the prediction value
+	}
 
-	int split_idx = -1;
-	double split_thresh = 0.0;
 
-	/* Implement the following:
-		--- define stopping criteria
-    	--- Loop through candidate features and potential split thresholds.
-		--- Find the best split threshold for the current feature.
-		--- grow the children that result from the split
-	*/
-	
-	// TODO
 
-	Node* left;
-	Node* right;
-	return new Node(split_idx, split_thresh, left, right); // return a new node with the split index, split threshold, left tree, and right tree
+	int numFeatures = X[0].size();
+	double bestMSE = DBL_MAX; // Initialize to a large value
+	int split_idx = -1;  // Index of the best feature to split
+	double split_thresh = 0.0;  // Best threshold to split on
+
+	// Loop through candidate features
+	for (int feature_idx = 0; feature_idx < numFeatures; ++feature_idx) {
+		std::vector<double> featureValues;
+		for (const auto& row : X) {
+			featureValues.push_back(row[feature_idx]);
+		}
+
+		// Sort the feature values to find possible split points
+		std::sort(featureValues.begin(), featureValues.end());
+
+		// Loop through potential split thresholds (midpoints between consecutive feature values)
+		for (int i = 1; i < featureValues.size(); ++i) {
+			double threshold = (featureValues[i - 1] + featureValues[i]) / 2.0;
+
+			double mse = this->meanSquaredError(y, X[i], threshold);
+
+			// If this split is better, store it
+			if (mse < bestMSE) {
+				bestMSE = mse;
+				split_idx = feature_idx;
+				split_thresh = threshold;
+			}
+		}
+	}
+
+	// If no split improved the MSE, return a leaf node
+	if (split_idx == -1) {
+		return new Node(-1, -1.0, nullptr, nullptr, this->mean(y));
+	}
+
+	// Split the data on the best feature and threshold
+	std::vector<std::vector<double>> left_X, right_X;
+	std::vector<double> left_y, right_y;
+	for (int j = 0; j < X.size(); ++j) {
+		if (X[j][split_idx] <= split_thresh) {
+			left_X.push_back(X[j]);
+			left_y.push_back(y[j]);
+		}
+		else {
+			right_X.push_back(X[j]);
+			right_y.push_back(y[j]);
+		}
+	}
+
+	if (left_y.empty() || right_y.empty()) {
+		return new Node(-1, -1.0, nullptr, nullptr, this->mean(y)); // Ensure y is not empty
+	}
+
+
+	// Recursively grow the children nodes
+	Node* left = growTree(left_X, left_y, depth + 1);
+	Node* right = growTree(right_X, right_y, depth + 1);
+
+	// Return the node with the best split
+	return new Node(split_idx, split_thresh, left, right);
+
 }
 
 
 /// meanSquaredError function: Calculates the mean squared error for a given split threshold.
 double DecisionTreeRegression::meanSquaredError(std::vector<double>& y, std::vector<double>& X_column, double split_thresh) {
 
-	double mse = 0.0;
 	
 	// Calculate the mse
 	// TODO
+
+
+	// Split the target vector `y` based on the feature column `X_column` and split threshold
+	std::vector<double> left_y, right_y;
+
+	for (int i = 0; i < X_column.size(); ++i) {
+		if (X_column[i] <= split_thresh) {
+			left_y.push_back(X_column[i]);
+		}
+		else {
+			right_y.push_back(X_column[i]);
+		}
+	}
+
+	double leftMean = this->mean(left_y);
+	double rightMean = this->mean(right_y);
+
+	double leftSE = 0.0, rightSE = 0.0;
+
+	for (int i = 0; i < left_y.size(); i++) {
+		leftSE += pow(left_y[i] - leftMean, 2);
+	}
+
+	for (int i = 0; i < right_y.size(); i++) {
+		rightSE += pow(right_y[i] - rightMean, 2);
+	}
+
+	return (leftSE + rightSE) / X_column.size();
 	
-	return mse;
 }
 
 // mean function: Calculates the mean of a given vector of doubles.//
 double DecisionTreeRegression::mean(std::vector<double>& values) {
 
 	double meanValue = 0.0;
+
+
+	for (const auto& value : values) {
+		meanValue += value;
+	}
 	
-	// calculate the mean
-	// TODO
-	
-	return meanValue;
+	return meanValue /= values.size();
 }
 
 // traverseTree function: Traverses the decision tree and returns the predicted value for the given input vector.//
@@ -96,6 +182,16 @@ double DecisionTreeRegression::traverseTree(std::vector<double>& x, Node* node) 
 		--- Otherwise, traverse the right subtree
 	*/
 	// TODO
+
+	if (node->isLeafNode()) return node->value;
+
+		if (x[node->feature] <= node->threshold) {
+			return this->traverseTree(x, node->left);
+		}
+		else {
+			return this->traverseTree(x, node->right);
+		}
+	
 
 	return 0.0;
 }
