@@ -19,7 +19,6 @@ public:
     std::tuple<double, double, double, double, double, double, 
         std::vector<double>, std::vector<double>, std::vector<double>, std::vector<double>> 
         runDecisionTreeRegression(const std::string& filePath, int trainingRatio);
-    double calculateMSE(std::vector<double>& y_subset);
 
 private:
     int min_samples_split;
