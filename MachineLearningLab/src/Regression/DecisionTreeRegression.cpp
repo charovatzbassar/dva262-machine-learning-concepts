@@ -53,7 +53,7 @@ std::vector<double> DecisionTreeRegression::predict(std::vector<std::vector<doub
 Node* DecisionTreeRegression::growTree(std::vector<std::vector<double>>& X, std::vector<double>& y, int depth) {
 
 	// Define stopping criteria
-	if (depth >= this->max_depth || X.size() <= this->min_samples_split) {
+	if (depth >= this->max_depth || y.size() <= this->min_samples_split) {
 		return new Node(-1, -1.0, nullptr, nullptr, this->mean(y)); // Create a leaf node with the prediction value
 	}
 
