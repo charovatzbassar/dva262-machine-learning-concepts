@@ -29,19 +29,47 @@ void LogisticRegression::fit(const std::vector<std::vector<double>>& X_train, co
     int num_features = X_train[0].size();
     int num_classes = std::set<double>(y_train.begin(), y_train.end()).size();
 
+    std::default_random_engine generator;
+    std::uniform_real_distribution<double> distribution(-0.01, 0.01);
 
-	/* Implement the following:
-       	--- Initialize weights for each class
-    	--- Loop over each class label
-    	--- Convert the problem into a binary classification problem
-        --- Loop over training epochs
-       	--- Add bias term to the training example
-    	--- Calculate weighted sum of features
-        --- Calculate the sigmoid of the weighted sum
-        --- Update weights using gradient descent
-    */
-    
-    // TODO
+    this->weights = std::vector<std::vector<double>>(num_classes, std::vector<double>(num_features + 1)); 
+    for (auto& weight_vec : this->weights) {
+        for (auto& weight : weight_vec) {
+            weight = distribution(generator);
+        }
+    }
+
+
+    for (int c = 0; c < num_classes; c++) {
+        std::vector<double> binary_labels(y_train.size());
+
+        std::transform(y_train.begin(), y_train.end(), binary_labels.begin(),
+            [c](double label) { return label == c ? 1.0 : 0.0; });
+
+        for (int epoch = 0; epoch < this->num_epochs; epoch++) {
+            for (int i = 0; i < X_train.size(); i++) {
+                // Add bias term (1) to the input vector
+                std::vector<double> x_with_bias = X_train[i];
+                x_with_bias.insert(x_with_bias.begin(), 1.0); // Add 1 at the beginning for bias
+
+                // Compute the weighted sum and the sigmoid
+
+                double z = this->weights[c][0];
+
+                for (int i = 0; i < X_train[i].size(); ++i) {
+                    z += this->weights[c][i + 1] * X_train[i][i]; // Weighted sum
+                }
+
+                double predicted = this->sigmoid(z);
+
+                // Update weights using gradient descent
+                for (int j = 0; j < this->weights[c].size(); j++) {
+                    this->weights[c][j] -= this->learning_rate * (predicted - binary_labels[i]) * x_with_bias[j];
+                }
+            }
+        }
+    }
+
 }
 
 // Predict method to predict class labels for test data
@@ -56,6 +84,10 @@ std::vector<double> LogisticRegression::predict(const std::vector<std::vector<do
     */
       
     // TODO
+
+    for (const auto& testPoint : X_test) {
+        
+    }
     
     return predictions;
 }
