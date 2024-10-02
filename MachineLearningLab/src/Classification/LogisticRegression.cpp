@@ -75,18 +75,26 @@ void LogisticRegression::fit(const std::vector<std::vector<double>>& X_train, co
 // Predict method to predict class labels for test data
 std::vector<double> LogisticRegression::predict(const std::vector<std::vector<double>>& X_test) {
     std::vector<double> predictions;
-    
-    /* Implement the following:
-    	--- Loop over each test example
-        --- Add bias term to the test example
-        --- Calculate scores for each class by computing the weighted sum of features
-        --- Predict class label with the highest score
-    */
-      
-    // TODO
 
     for (const auto& testPoint : X_test) {
-        
+        std::vector<double> x_with_bias = testPoint;
+        x_with_bias.insert(x_with_bias.begin(), 1.0);
+
+        std::vector<double> class_scores(weights.size(), 0.0);
+
+        // Compute the score for each class
+        for (int c = 0; c < weights.size(); c++) {
+            double score = weights[c][0]; // Bias term
+            for (size_t i = 1; i < weights[c].size(); ++i) {
+                score += weights[c][i] * x_with_bias[i];
+            }
+            class_scores[c] = score; // Store score for the class
+        }
+
+        // Predict the class with the highest score
+        auto max_score_it = std::max_element(class_scores.begin(), class_scores.end());
+        int predicted_class = std::distance(class_scores.begin(), max_score_it);
+        predictions.push_back(predicted_class);
     }
     
     return predictions;
