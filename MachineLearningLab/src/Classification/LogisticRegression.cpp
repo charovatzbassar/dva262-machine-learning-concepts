@@ -32,7 +32,7 @@ void LogisticRegression::fit(const std::vector<std::vector<double>>& X_train, co
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(-0.01, 0.01);
 
-    this->weights = std::vector<std::vector<double>>(num_classes, std::vector<double>(num_features + 1)); 
+    this->weights = std::vector<std::vector<double>>(num_classes + 1, std::vector<double>(num_features + 1)); 
     for (auto& weight_vec : this->weights) {
         for (auto& weight : weight_vec) {
             weight = distribution(generator);
@@ -40,7 +40,7 @@ void LogisticRegression::fit(const std::vector<std::vector<double>>& X_train, co
     }
 
 
-    for (int c = 0; c < num_classes; c++) {
+    for (int c = 1; c <= num_classes; c++) {
         std::vector<double> binary_labels(y_train.size());
 
         std::transform(y_train.begin(), y_train.end(), binary_labels.begin(),
@@ -56,8 +56,8 @@ void LogisticRegression::fit(const std::vector<std::vector<double>>& X_train, co
 
                 double z = this->weights[c][0];
 
-                for (int i = 0; i < X_train[i].size(); ++i) {
-                    z += this->weights[c][i + 1] * X_train[i][i]; // Weighted sum
+                for (int j = 0; j < X_train[i].size(); ++j) {
+                    z += this->weights[c][j + 1] * X_train[i][j]; // Weighted sum
                 }
 
                 double predicted = this->sigmoid(z);
