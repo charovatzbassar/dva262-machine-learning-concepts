@@ -33,15 +33,49 @@ void FuzzyCMeans::fit(const std::vector<std::vector<double>>& data) {
 	// Create a copy of the data to preserve the original dataset
 	std::vector<std::vector<double>> normalizedData = data;
 
-	/* Implement the following:
-		--- Initialize centroids randomly
-		--- Initialize the membership matrix with the number of data points
-		--- Perform Fuzzy C-means clustering
-	*/
-	
-	//TODO
-	
+	// Initialize membership matrix randomly
+	this->initializeMembershipMatrix(normalizedData.size());
+	centroids_.resize(this->numClusters_, std::vector<double>(normalizedData[0].size()));
+
+	// Randomly initialize centroids
+	std::srand(std::time(NULL));
+	for (int i = 0; i < this->numClusters_; i++) {
+		for (int j = 0; j < normalizedData[0].size(); j++) {
+			this->centroids_[i][j] = (static_cast<double>(std::rand()) / RAND_MAX);
+		}
+	}
+
+	double epsilon = 1e-5;   // Convergence threshold
+
+	for (int iteration = 0; iteration < this->maxIterations_; iteration++) {
+		std::vector<std::vector<double>> previousCentroids = centroids_;
+
+		// Step 1: Update the membership matrix based on current centroids
+		this->updateMembershipMatrix(normalizedData, centroids_);
+
+		// Step 2: Update centroids based on the new membership matrix
+		this->updateCentroids(normalizedData);
+
+		// Step 3: Check for convergence (if centroids have not changed significantly)
+		bool converged = true;
+		for (int i = 0; i < centroids_.size(); i++) {
+			for (int j = 0; j < centroids_[i].size(); j++) {
+				if (std::abs(centroids_[i][j] - previousCentroids[i][j]) > epsilon) {
+					converged = false;
+					break;
+				}
+			}
+			if (!converged) break;
+		}
+
+		// If centroids have converged, we can exit the loop
+		if (converged) {
+			break;
+		}
+	}
+
 }
+
 
 
 // initializeMembershipMatrix function: Initializes the membership matrix with random values that sum up to 1 for each data point.//
@@ -51,21 +85,20 @@ void FuzzyCMeans::initializeMembershipMatrix(int numDataPoints) {
 
 	std::srand(std::time(NULL));
 
+	// Initialize membership values for each data point
+	for (auto& dataPoint : membershipMatrix_) {
+		double sum = 0.0;
 
-	for (auto& dataPoint : this->membershipMatrix_) {
-		std::vector<double> randomValues;
-		randomValues.push_back(0.0);
-
-		for (double val : randomValues) {
-			val = static_cast<double>(std::rand()) / RAND_MAX;
+		// Generate random membership values for each cluster
+		for (int j = 0; j < numClusters_; j++) {
+			dataPoint[j] = static_cast<double>(std::rand()) / RAND_MAX;
+			sum += dataPoint[j];
 		}
 
-		randomValues.push_back(1.0);
-
-		for (int j = 1; j < randomValues.size(); j++) {
-			dataPoint[j - 1] = randomValues[j] - randomValues[j - 1];
+		// Normalize the membership values so they sum to 1
+		for (int j = 0; j < numClusters_; j++) {
+			dataPoint[j] /= sum;
 		}
-		
 	}
 }
 
@@ -73,40 +106,65 @@ void FuzzyCMeans::initializeMembershipMatrix(int numDataPoints) {
 // updateMembershipMatrix function: Updates the membership matrix using the fuzzy c-means algorithm.//
 void FuzzyCMeans::updateMembershipMatrix(const std::vector<std::vector<double>>& data, const std::vector<std::vector<double>> centroids_) {
 
-	/* Implement the following:
-		---	Iterate through each data point
-		--- Calculate the distance between the data point and the centroid
-		--- Update the membership matrix with the new value
-		--- Normalize membership values to sum up to 1 for each data point
-	*/
-	
-	// TODO
-
+	// Iterate through each data point
 	for (int i = 0; i < data.size(); i++) {
-		double distance = SimilarityFunctions::euclideanDistance(data[i], centroids_[i]);
+		std::vector<double> distances(centroids_.size(), 0.0);
 
-		this->membershipMatrix_[i] = { distance, 1 - distance };
+		// Calculate the distance between the data point and each centroid
+		for (int j = 0; j < centroids_.size(); j++) {
+			distances[j] = SimilarityFunctions::euclideanDistance(data[i], centroids_[j]);
+		}
+
+		// Update membership matrix
+		for (int j = 0; j < centroids_.size(); j++) {
+			double sum = 0.0;
+
+			// Normalize membership values based on the inverse distance
+			for (int k = 0; k < centroids_.size(); k++) {
+				sum += pow(distances[j] / distances[k], 2.0 / (this->fuzziness_ - 1));
+			}
+
+			membershipMatrix_[i][j] = 1.0 / sum;
+		}
 	}
-
 	
 }
 
 
 // updateCentroids function: Updates the centroids of the Fuzzy C-Means algorithm.//
 std::vector<std::vector<double>> FuzzyCMeans::updateCentroids(const std::vector<std::vector<double>>& data) {
+	int numClusters = this->centroids_.size();
+	int numDataPoints = data.size();
+	int numFeatures = data[0].size();
 
-	for (int i = 0; i < data.size(); i++) {
-		std::vector<double> newCentroid;
+	std::vector<std::vector<double>> newCentroids(numClusters, std::vector<double>(numFeatures, 0.0));
 
-		for (int j = 0; j < data[i].size(); j++) {
-			newCentroid[j] = std::pow(data[i][j], this->fuzziness_);
+	// Iterate over each cluster to update its centroid
+	for (int k = 0; k < numClusters; k++) {
+		std::vector<double> numerator(numFeatures, 0.0);
+		double denominator = 0.0;
+
+		// Iterate over each data point
+		for (int i = 0; i < numDataPoints; i++) {
+			double membershipValue = std::pow(membershipMatrix_[i][k], fuzziness_);
+
+			// Update numerator and denominator
+			for (int j = 0; j < numFeatures; j++) {
+				numerator[j] += membershipValue * data[i][j];
+			}
+			denominator += membershipValue;
 		}
 
-		centroids_[i] = newCentroid;
+		// Calculate the new centroid for cluster k
+		for (int j = 0; j < numFeatures; j++) {
+			newCentroids[k][j] = numerator[j] / denominator;
+		}
 	}
 
+	// Update the centroids_
+	centroids_ = newCentroids;
 
-	return centroids_; // Return the centroids
+	return centroids_; // Return the updated centroids
 }
 
 
@@ -115,29 +173,29 @@ std::vector<int> FuzzyCMeans::predict(const std::vector<std::vector<double>>& da
 	std::vector<int> labels; // Create a vector to store the labels
 	labels.reserve(data.size()); // Reserve space for the labels
 
-	/* Implement the following:
-		--- Iterate through each point in the data
-		--- Iterate through each centroid
-		--- Calculate the distance between the point and the centroid
-		--- Calculate the membership of the point to the centroid
-		--- Add the label of the closest centroid to the labels vector
-	*/
-	
-	//TODO
 
-	for (int i = 0; i < data.size(); i++) {
-		double min = DBL_MAX;
-		for (int j = 0; j < this->centroids_.size(); j++) {
-			double distance = SimilarityFunctions::euclideanDistance(data[i], centroids_[j]);
+    // Iterate through each point in the data
+    for (int i = 0; i < data.size(); i++) {
+        double minDistance = DBL_MAX;
+        int bestCluster = -1;
 
-			if (distance < min) {
-				min = distance;
-			}
-		}
-		labels.push_back(min);
-	}
+        // Iterate through each centroid
+        for (int j = 0; j < this->centroids_.size(); j++) {
+            // Calculate the distance between the data point and the centroid
+            double distance = SimilarityFunctions::euclideanDistance(data[i], centroids_[j]);
 
-	return labels; // Return the labels vector
+            // If the distance is smaller than the current minimum, update
+            if (distance < minDistance) {
+                minDistance = distance;
+                bestCluster = j;  // Set the current closest centroid as the label
+            }
+        }
+
+        // Add the label (index of the closest centroid) to the labels vector
+        labels.push_back(bestCluster);
+    }
+
+    return labels;  // Return the labels vector
 
 }
 
@@ -148,7 +206,7 @@ std::vector<int> FuzzyCMeans::predict(const std::vector<std::vector<double>>& da
 std::tuple<double, double, std::vector<int>, std::vector<std::vector<double>>>
 FuzzyCMeans::runFuzzyCMeans(const std::string& filePath) {
 	DataPreprocessor DataPreprocessor;
-	try {
+	//try {
 		// Check if the file path is empty
 		if (filePath.empty()) {
 			MessageBox::Show("Please browse and select the dataset file from your PC.");
@@ -198,11 +256,11 @@ FuzzyCMeans::runFuzzyCMeans(const std::string& filePath) {
 
 		MessageBox::Show("Run completed");
 		return std::make_tuple(daviesBouldinIndex, silhouetteScore, std::move(labels), std::move(reduced_data));
-	}
-	catch (const std::exception& e) {
-		// Handle the exception
-		MessageBox::Show("Not Working");
-		std::cerr << "Exception occurred: " << e.what() << std::endl;
-		return std::make_tuple(0.0, 0.0, std::vector<int>(), std::vector<std::vector<double>>());
-	}
+	//}
+	//catch (const std::exception& e) {
+	//	// Handle the exception
+	//	MessageBox::Show("Not Working");
+	//	std::cerr << "Exception occurred: " << e.what() << std::endl;
+	//	return std::make_tuple(0.0, 0.0, std::vector<int>(), std::vector<std::vector<double>>());
+	//}
 }

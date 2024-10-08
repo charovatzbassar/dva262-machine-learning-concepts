@@ -1,95 +1,10 @@
-﻿  LogisticRegression.cpp
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Classification\LogisticRegression.cpp(29,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Classification\LogisticRegression.cpp(30,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Classification\LogisticRegression.cpp(96,29): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Classification\LogisticRegression.cpp(109,22): warning C4101: 'DataPreprocessor': unreferenced local variable
-  MainForm.cpp
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\MainForm.h(1642,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'src/MainForm.cpp')
-  
-  LinearRegression.cpp
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\MainForm.h(1642,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'src/Regression/LinearRegression.cpp')
-  
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Regression\LinearRegression.cpp(183,46): warning C4101: 'e': unreferenced local variable
-  Generating Code...
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(1115,1): warning C4793: 'Eigen::internal::queryCacheSizes': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(1115,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\MathFunctions.h(191,1): warning C4793: 'Eigen::numext::sqrt<double>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\MathFunctions.h(191,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\MathFunctions.h(191,1): warning C4793: 'Eigen::numext::sqrt<double>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\MathFunctions.h(191,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(1087,1): warning C4793: 'Eigen::internal::queryCacheSizes_amd': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(1087,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(1090,1): warning C4793: 'Eigen::internal::queryCacheSizes_amd': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(1090,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(1093,1): warning C4793: 'Eigen::internal::queryCacheSizes_amd': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(1093,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(967,1): warning C4793: 'Eigen::internal::queryCacheSizes_intel_direct': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(967,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(996,1): warning C4793: 'Eigen::internal::queryCacheSizes_intel_codes': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\util\Memory.h(996,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(790,1): warning C4793: 'Eigen::internal::pstore<double,__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(790,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(794,1): warning C4793: 'Eigen::internal::pstoreu<double,__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(794,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(1007,1): warning C4793: 'Eigen::internal::predux<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(1007,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(1007,1): warning C4793: 'Eigen::internal::predux<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(1007,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(258,1): warning C4793: 'Eigen::internal::pset1<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(258,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(746,1): warning C4793: 'Eigen::internal::ploadu<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(746,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(347,1): warning C4793: 'Eigen::internal::pmul<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(347,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(296,1): warning C4793: 'Eigen::internal::psub<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(296,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(290,1): warning C4793: 'Eigen::internal::padd<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(290,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(1130,1): warning C4793: 'Eigen::internal::ptranspose': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(1130,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(1131,1): warning C4793: 'Eigen::internal::ptranspose': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(1131,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(869,1): warning C4793: 'Eigen::internal::prefetch<double>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(869,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(970,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(970,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(970,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(970,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(970,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(970,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(971,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(971,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(971,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(971,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(971,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(971,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(973,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(973,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(973,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(973,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(973,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(973,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(974,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(974,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(974,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(974,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(974,1): warning C4793: 'Eigen::internal::pbroadcast4<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(974,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(829,1): warning C4793: 'Eigen::internal::pscatter<double,__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(829,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(830,1): warning C4793: 'Eigen::internal::pscatter<double,__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(830,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(830,1): warning C4793: 'Eigen::internal::pscatter<double,__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(830,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(716,1): warning C4793: 'Eigen::internal::pload<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(716,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(367,1): warning C4793: 'Eigen::internal::pdiv<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(367,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(531,1): warning C4793: 'Eigen::internal::pmax<__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(531,1): warning C4793: 	Found an intrinsic not supported in managed code
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(805,1): warning C4793: 'Eigen::internal::pgather<double,__m128d>': function compiled as native:
-D:\ML Lab\AdditionalLibraries\eigen-3.4.0\Eigen\src\Core\arch\SSE\PacketMath.h(805,1): warning C4793: 	Found an intrinsic not supported in managed code
+﻿  FuzzyCMeans.cpp
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(37,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(41,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(86,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(136,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(137,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(138,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(208,19): warning C4101: 'DataPreprocessor': unreferenced local variable
   DecisionTreeClassification.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   MachineLearningLab.vcxproj -> D:\ML Lab\MachineLearningLab\bin\x64Debug\MachineLearningLab.exe
