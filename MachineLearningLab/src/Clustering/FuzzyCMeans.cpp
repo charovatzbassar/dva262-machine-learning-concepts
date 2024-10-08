@@ -8,12 +8,14 @@
 #include <vector>
 #include <utility>
 #include <algorithm>
+#include <ctime>
 #include <cmath>
 #include <random> 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <limits.h>
 #include <unordered_map> 
 using namespace System::Windows::Forms; // For MessageBox
 
@@ -47,12 +49,24 @@ void FuzzyCMeans::initializeMembershipMatrix(int numDataPoints) {
 	membershipMatrix_.clear();
 	membershipMatrix_.resize(numDataPoints, std::vector<double>(numClusters_, 0.0));
 
-	/* Implement the following:
-		--- Initialize membership matrix with random values that sum up to 1 for each data point
-		---	Normalize membership values to sum up to 1 for each data point
-	*/
-	
-	// TODO
+	std::srand(std::time(NULL));
+
+
+	for (auto& dataPoint : this->membershipMatrix_) {
+		std::vector<double> randomValues;
+		randomValues.push_back(0.0);
+
+		for (double val : randomValues) {
+			val = static_cast<double>(std::rand()) / RAND_MAX;
+		}
+
+		randomValues.push_back(1.0);
+
+		for (int j = 1; j < randomValues.size(); j++) {
+			dataPoint[j - 1] = randomValues[j] - randomValues[j - 1];
+		}
+		
+	}
 }
 
 
@@ -67,6 +81,13 @@ void FuzzyCMeans::updateMembershipMatrix(const std::vector<std::vector<double>>&
 	*/
 	
 	// TODO
+
+	for (int i = 0; i < data.size(); i++) {
+		double distance = SimilarityFunctions::euclideanDistance(data[i], centroids_[i]);
+
+		this->membershipMatrix_[i] = { distance, 1 - distance };
+	}
+
 	
 }
 
@@ -74,13 +95,15 @@ void FuzzyCMeans::updateMembershipMatrix(const std::vector<std::vector<double>>&
 // updateCentroids function: Updates the centroids of the Fuzzy C-Means algorithm.//
 std::vector<std::vector<double>> FuzzyCMeans::updateCentroids(const std::vector<std::vector<double>>& data) {
 
-	/* Implement the following:
-		--- Iterate through each cluster
-		--- Iterate through each data point
-		--- Calculate the membership of the data point to the cluster raised to the fuzziness
-	*/
-	
-	// TODO
+	for (int i = 0; i < data.size(); i++) {
+		std::vector<double> newCentroid;
+
+		for (int j = 0; j < data[i].size(); j++) {
+			newCentroid[j] = std::pow(data[i][j], this->fuzziness_);
+		}
+
+		centroids_[i] = newCentroid;
+	}
 
 
 	return centroids_; // Return the centroids
@@ -101,6 +124,18 @@ std::vector<int> FuzzyCMeans::predict(const std::vector<std::vector<double>>& da
 	*/
 	
 	//TODO
+
+	for (int i = 0; i < data.size(); i++) {
+		double min = DBL_MAX;
+		for (int j = 0; j < this->centroids_.size(); j++) {
+			double distance = SimilarityFunctions::euclideanDistance(data[i], centroids_[j]);
+
+			if (distance < min) {
+				min = distance;
+			}
+		}
+		labels.push_back(min);
+	}
 
 	return labels; // Return the labels vector
 
