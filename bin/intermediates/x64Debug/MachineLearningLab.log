@@ -1,17 +1,10 @@
-﻿  LogisticRegression.cpp
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Classification\LogisticRegression.cpp(29,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Classification\LogisticRegression.cpp(30,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Classification\LogisticRegression.cpp(96,29): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Classification\LogisticRegression.cpp(109,22): warning C4101: 'DataPreprocessor': unreferenced local variable
-  MainForm.cpp
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\MainForm.h(1642,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'src/MainForm.cpp')
-  
-  LinearRegression.cpp
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\MainForm.h(1642,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'src/Regression/LinearRegression.cpp')
-  
-D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Regression\LinearRegression.cpp(110,46): warning C4101: 'e': unreferenced local variable
-  Generating Code...
+﻿  FuzzyCMeans.cpp
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(37,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(41,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(86,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(136,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(137,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(138,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\ML Lab\MachineLearningLab\MachineLearningLab\src\Clustering\FuzzyCMeans.cpp(208,19): warning C4101: 'DataPreprocessor': unreferenced local variable
   DecisionTreeClassification.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   MachineLearningLab.vcxproj -> D:\ML Lab\MachineLearningLab\bin\x64Debug\MachineLearningLab.exe
