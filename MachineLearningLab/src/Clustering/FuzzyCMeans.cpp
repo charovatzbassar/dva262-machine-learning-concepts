@@ -25,7 +25,7 @@ using namespace System::Windows::Forms; // For MessageBox
 
 // FuzzyCMeans function: Constructor for FuzzyCMeans class.//
 FuzzyCMeans::FuzzyCMeans(int numClusters, int maxIterations, double fuzziness)
-	: numClusters_(numClusters), maxIterations_(maxIterations), fuzziness_(fuzziness) {}
+	: numClusters_(numClusters + 1), maxIterations_(maxIterations), fuzziness_(fuzziness) {}
 
 
 // fit function: Performs Fuzzy C-Means clustering on the given dataset and return the centroids of the clusters.//
